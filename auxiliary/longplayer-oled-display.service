@@ -1,0 +1,17 @@
+#--------------------------------------------------------------------------------
+# systemd service for longplayer-oled-display
+#--------------------------------------------------------------------------------
+
+[Unit]
+Description=Longplayer OLED Display
+After=sound.target
+
+[Service]
+Type=simple
+User=pi
+ExecStart=/home/pi/longplayer-oled-display/.venv/bin/python3 display-status.py
+WorkingDirectory=/home/pi/longplayer-oled-display
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
