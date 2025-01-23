@@ -7,7 +7,11 @@ import threading
 
 
 def get_chrony_stats():
-    lines = subprocess.check_output(["chronyc", "-c", "sources"]).decode()
+    try:
+        lines = subprocess.check_output(["chronyc", "-c", "sources"]).decode()
+    except subprocess.CalledProcessError:
+        return None, 0.0, 0
+
     lines = lines.split("\n")
     sync_method = None
     sync_level = 0.0
