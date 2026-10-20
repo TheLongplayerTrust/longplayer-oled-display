@@ -50,8 +50,7 @@ class SyncStatsListener:
             if gps_data:
                 data_stream.unpack(gps_data)
                 gps_data = json.loads(gps_data)
-                if gps_data["class"] == "SKY":
+                if gps_data["class"] == "SKY" and "satellites" in gps_data.keys():
                     self.satellites_in_use = sum(1 for sat in gps_data["satellites"] if sat.get("used"))
                     print("Sync method: %s, sync level: %.3fus, satellites in use: %d" % (self.sync_method, self.sync_level, self.satellites_in_use))
             time.sleep(0.1)
-
